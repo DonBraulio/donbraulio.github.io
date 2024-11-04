@@ -1,3 +1,44 @@
-baseURL = 'https://example.org/'
+baseURL = "https://donbraulio.github.io/"
 languageCode = 'en-us'
-title = 'My New Hugo Site'
+title = "Lamparilla 💡"
+
+defaultContentLanguage = "en"
+defaultContentLanguageInSubdir = true
+disqusShortname = ""
+
+staticDir = ["static", "themes/Niello/static"]
+
+theme = "Niello"
+
+[languages]
+	[languages.en]
+		title = "DonBraulio - Development Blog"
+		languageCode = "en-us"
+		LanguageName = "🇺🇸EN"
+		contentDir = "content/en"
+		weight = 1
+		[[languages.en.menus.main]]
+			name = 'Home'
+			pageRef = '/'
+			weight = 1
+		[[languages.en.menus.main]]
+			name = 'Categories'
+			pageRef = '/categories'
+			weight = 2
+		[[languages.en.menus.main]]
+			name = 'Tags'
+			pageRef = '/tags'
+			weight = 3
+		[[languages.en.menus.main]]
+			name = 'Contact'
+			pageRef = '/contact'
+			weight = 4
+        
+[params]
+copyright = "&#xA9; 2024 by Braulio Ríos. All Rights Reserved."
+google_ad_client = "ca-pub-******"
+ga4 = "G-******"
+sharethis = ""
+
+[outputs]
+  home = ["HTML", "JSON"]
