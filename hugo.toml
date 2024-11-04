@@ -4,7 +4,6 @@ title = "Lamparilla 💡"
 
 defaultContentLanguage = "en"
 defaultContentLanguageInSubdir = true
-disqusShortname = ""
 
 staticDir = ["static", "themes/Niello/static"]
 
