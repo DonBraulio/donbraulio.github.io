@@ -339,10 +339,26 @@ Let&rsquo;s dive into some interesting technical aspects of this full-fledged vi
             <ul class="post-categories">
                 
                     
-                    <li><a href="/categories/archives/">Archives</a></li>
+                    <li><a href="/categories/blogpost/">Blogpost</a></li>
                 
             </ul>
         
+        
+            <ul class="post-tags">
+                
+                    
+                    <li><a href="/tags/python/">#Python</a></li>
+                
+                    
+                    <li><a href="/tags/c&#43;&#43;/">#C&#43;&#43;</a></li>
+                
+                    
+                    <li><a href="/tags/computer-vision/">#Computer Vision</a></li>
+                
+                    
+                    <li><a href="/tags/machine-learning/">#Machine Learning</a></li>
+                
+            </ul>
         
         
     </div>
@@ -416,6 +432,12 @@ Let&rsquo;s dive into some interesting technical aspects of this full-fledged vi
 </div>
 </h2>
 <p>NVIDIA&rsquo;s Jetson Nano, while affordable and accessible (USD 90 at the time), is constrained in terms of memory (4GB of RAM) and CPU resources. Developing a system capable of handling multiple tasks—including computer vision, streaming, and storage management—requires efficient memory management, GPU processing, and robust orchestration of parallel processes.</p>
+<figure><img src="/images/maskcam/maskcam_jetson.png"
+    alt="Jetson Nano SOM" width="30%"><figcaption>
+      <p>Jetson Nano SOM</p>
+    </figcaption>
+</figure>
+
 <p>Pure Python solutions fall short here:</p>
 <ul>
 <li>The Global Interpreter Lock (GIL) limits true multithreading.</li>

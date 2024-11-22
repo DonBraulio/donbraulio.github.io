@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>C&#43;&#43; on Braulio Ríos - Development Blog</title>
+    <link>/tags/c&#43;&#43;/</link>
+    <description>Braulio Ríos - Development Blog (C&#43;&#43;)</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    
+
+    
+    <lastBuildDate>Fri, 22 Nov 2024 13:00:51 -0300</lastBuildDate>
+    
+    <atom:link href="/tags/c++/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Lessons from Building ‘Pandas for Temporal Data’ with Google</title>
+      <link>/posts/temporian/</link>
+      <pubDate>Fri, 22 Nov 2024 13:00:51 -0300</pubDate>
+      
+      <guid>/posts/temporian/</guid>
+      <description>&lt;p&gt;Time-series data is everywhere, from tracking user behavior to monitoring IoT sensors. Last year, while working at Tryolabs, I had the privilege of collaborating with Google to build an open-source Python library named Temporian. If Pandas is the go-to library for tabular data, Temporian aims to fill that role for temporal data.&lt;/p&gt;
+&lt;figure&gt;&lt;img src=&#34;http://localhost:1313/images/temporian/temporian_diagram.avif&#34;
+    alt=&#34;Diagram showing Temporian as part of a data pipeline&#34; width=&#34;70%&#34;&gt;&lt;figcaption&gt;
+      &lt;p&gt;The role of Temporian in a data pipeline.&lt;/p&gt;
+    &lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;Here’s a glimpse into my experience as a developer on this incredible project and the lessons I learned along the way.&lt;/p&gt;
+&lt;h2 id=&#34;the-problem&#34; &gt;
+&lt;div&gt;
+    &lt;a href=&#34;#the-problem&#34;&gt;
+        #
+    &lt;/a&gt;
+    The Problem
+&lt;/div&gt;
+&lt;/h2&gt;
+&lt;p&gt;There are many libraries for time-series preprocessing, but Temporian is for time-sequences in general. The difference is subtle, a time-series is uniformly sampled (i.e: has a fixed sampling rate), while a time-sequence is just a set of events sampled at any possible timestamp.&lt;/p&gt;
+&lt;figure&gt;&lt;img src=&#34;http://localhost:1313/images/temporian/temporian_data.avif&#34;
+    alt=&#34;Different types of temporal data&#34; width=&#34;70%&#34;&gt;&lt;figcaption&gt;
+      &lt;p&gt;Basically anything with a timestamp can be thought as an event in a time-sequence.&lt;/p&gt;
+    &lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;There are also libraries particularly for univariate data, or only numerical data, among other particularities.
+But Temporian is intended to allow modeling anything with a timestamp, basically:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Uniformly and non-uniformly sampled data&lt;/li&gt;
+&lt;li&gt;Single and multi-source events&lt;/li&gt;
+&lt;li&gt;Complex multivariate time-sequences&lt;/li&gt;
+&lt;/ul&gt;
+&lt;figure&gt;&lt;img src=&#34;http://localhost:1313/images/temporian/temporian_plots.avif&#34;
+    alt=&#34;Plots with different types of temporal data&#34; width=&#34;100%&#34;&gt;&lt;figcaption&gt;
+      &lt;p&gt;Different types of temporal data.&lt;/p&gt;
+    &lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;On top of that, it&amp;rsquo;s intended to be blisteringly fast even with tons of data. I mean, it&amp;rsquo;s backed by Google. So the engineering design is an important aspect, as well as writing the critical parts in C++ to optimize processing.&lt;/p&gt;
+&lt;p&gt;Finally, it&amp;rsquo;s intended to avoid common mistakes when handling temporal data, which usually arise when other libraries like pandas or numpy are adapted for these purposes. The most common mistake (precisely because it&amp;rsquo;s hard to spot sometimes) is future leakage. Which means leaking data from events in the future, to build features if previous events. Temporian is specifically designed in a way that avoids that, ensuring robust, error-free feature engineering—essential for machine learning applications.&lt;/p&gt;
+&lt;h3 id=&#34;from-python-to-c-and-beyond&#34; &gt;
+&lt;div&gt;
+    &lt;a href=&#34;#from-python-to-c-and-beyond&#34;&gt;
+        ##
+    &lt;/a&gt;
+    From Python to C++ and Beyond
+&lt;/div&gt;
+&lt;/h3&gt;
+&lt;p&gt;For me as a developer, there were many interesting challenges in this project, from which I learned a lot:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Writing Performant Operators in C++&lt;/strong&gt;:
+One contribution I particularly remember was the &lt;code&gt;tick_calendar&lt;/code&gt; operator, which generates timestamps using a cron-like syntax (e.g., “every day at 2:15 AM”). This required diving deep into C++ for optimal performance—a challenging but deeply rewarding experience.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Ensuring Quality&lt;/strong&gt;:
+Working with Google’s open-source standards meant adhering to the highest levels of code quality and test-driven development. Every release was meticulously reviewed to match the rigor of libraries like Pandas or NumPy.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Intuitive Design through UX Testing&lt;/strong&gt;:
+Another highlight of the project was our focus on usability. We created test protocols that challenged developers to solve problems using Temporian’s documentation alone. Watching real users interact with our library revealed surprising gaps—and ultimately shaped a much better product.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;what-i-learned&#34; &gt;
+&lt;div&gt;
+    &lt;a href=&#34;#what-i-learned&#34;&gt;
+        #
+    &lt;/a&gt;
+    What I Learned
+&lt;/div&gt;
+&lt;/h2&gt;
+&lt;p&gt;Each of the points mentioned above can be mapped to some specific learnings:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Cross-Language Development is a Superpower: Again, combining Python for ease of use and fast development and C++ for performance.&lt;/li&gt;
+&lt;li&gt;Test-Driven Development is Non-Negotiable: When building a library meant to last, rigorous testing isn’t just a good practice—it’s the foundation.&lt;/li&gt;
+&lt;li&gt;User Feedback is Priceless: Designing for intuition is hard. Real-world testing with developers showed how they interpreted our documentation and APIs, often in ways we didn’t expect.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;final-thoughts&#34; &gt;
+&lt;div&gt;
+    &lt;a href=&#34;#final-thoughts&#34;&gt;
+        #
+    &lt;/a&gt;
+    Final thoughts
+&lt;/div&gt;
+&lt;/h2&gt;
+&lt;p&gt;Temporian is open-source, hosted on &lt;a href=&#34;https://github.com/google/temporian&#34;&gt;Google’s GitHub&lt;/a&gt; repository, and even announced on &lt;a href=&#34;https://blog.tensorflow.org/2023/09/forecasting-with-tensorflow-decision-forests-and-temporian.html&#34;&gt;Google’s TensorFlow blog&lt;/a&gt; as a complement for ML pipelines. Seeing the library achieve this level of impact is one of the most gratifying experiences of my career.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Python ❤️ C&#43;&#43; for Embedded Computer Vision and Tracking</title>
+      <link>/posts/maskcam/</link>
+      <pubDate>Thu, 21 Nov 2024 13:44:18 -0300</pubDate>
+      
+      <guid>/posts/maskcam/</guid>
+      <description>&lt;figure&gt;&lt;img src=&#34;http://localhost:1313/images/maskcam/maskcam_hardware.avif&#34;
+    alt=&#34;Hardware for the smart camera&#34; width=&#34;70%&#34;&gt;&lt;figcaption&gt;
+      &lt;p&gt;Assembled smart camera that runs the computer vision pipeline&lt;/p&gt;
+    &lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;Here&amp;rsquo;s an interesting Open Source project I worked on some time ago: a real-time computer vision system on a constrained embedded device. It required combining a high-level language (Python) to tackle all the requirements (remote server comm, streaming, file sharing), with the C++ components of NVIDIA&amp;rsquo;s DeepStream which leverage GPU-accelerated processing.&lt;/p&gt;
+&lt;p&gt;Let&amp;rsquo;s dive into some interesting technical aspects of this full-fledged video pipeline capable of object detection, tracking, video streaming, storage management, and remote control—all running in harmony on a compact embedded device. Here’s how it works.&lt;/p&gt;
+&lt;p&gt;I was the developer for this project while working at &lt;a href=&#34;https://tryolabs.com&#34;&gt;Tryolabs&lt;/a&gt;. It was a collaboration with &lt;a href=&#34;https://bdti.com&#34;&gt;BDTI&lt;/a&gt; and led to a talk at &lt;a href=&#34;https://www.nvidia.com/en-us/on-demand/session/gtcspring21-s32588/&#34;&gt;NVIDIA&amp;rsquo;s GTC&lt;/a&gt; that we delivered together with Evan Juras, the hardware engineer.&lt;/p&gt;
+&lt;h2 id=&#34;challenge&#34; &gt;
+&lt;div&gt;
+    &lt;a href=&#34;#challenge&#34;&gt;
+        #
+    &lt;/a&gt;
+    Challenge
+&lt;/div&gt;
+&lt;/h2&gt;
+&lt;p&gt;NVIDIA&amp;rsquo;s Jetson Nano, while affordable and accessible (USD 90 at the time), is constrained in terms of memory (4GB of RAM) and CPU resources. Developing a system capable of handling multiple tasks—including computer vision, streaming, and storage management—requires efficient memory management, GPU processing, and robust orchestration of parallel processes.&lt;/p&gt;
+&lt;p&gt;Pure Python solutions fall short here:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The Global Interpreter Lock (GIL) limits true multithreading.&lt;/li&gt;
+&lt;li&gt;Multiprocessing requires inter-process communication, which can add significant overhead.&lt;/li&gt;
+&lt;li&gt;Handling raw video frames often involves costly memory copies between GPU and RAM.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;On the flip side, writing the entire pipeline in C++ would be time-intensive and inflexible. To bridge this gap, we combined Python’s development speed with C++’s performance through NVIDIA DeepStream’s Python bindings.&lt;/p&gt;
+&lt;h2 id=&#34;solution&#34; &gt;
+&lt;div&gt;
+    &lt;a href=&#34;#solution&#34;&gt;
+        #
+    &lt;/a&gt;
+    Solution
+&lt;/div&gt;
+&lt;/h2&gt;
+&lt;p&gt;DeepStream serves as the backbone of the pipeline, handling video processing and object detection using highly optimized GPU-accelerated modules. The pipeline was defined in Python, but all the heavy lifting—frame decoding, inference, and metadata generation—happens in DeepStream’s C++-optimized core.&lt;/p&gt;
+&lt;p&gt;But also, I was working at Tryolabs at the time, and we had our standout object tracking library &lt;a href=&#34;https://tryolabs.com/blog/2020/09/10/releasing-norfair-an-open-source-library-for-object-tracking&#34;&gt;Norfair&lt;/a&gt; which is entirely written in Python. Naturally, we wanted to use it—not only because it’s awesome but also because we had deep expertise in its inner workings and personally knew every Kalman Filter involved.&lt;/p&gt;
+&lt;p&gt;This was an interesting challenge, because we needed real-time access to the detections but without access to the video frames, which were deep down flowing through the GPU. And even more, then we needed to draw the bounding boxes of the smoothed tracker detections back in the frame.&lt;/p&gt;
+&lt;p&gt;Long story short, we were able to solve this by probing the video pipeline after the object detection model, in order to access the detections metadata. This allowed us to process the object coordinates in Python and feed them into our Norfair tracker. Then, we had to draw the tracked objects into the frame, by using Deepstream&amp;rsquo;s drawing component, which basically receives a series of commands to draw different shapes into the video frames (e.g: rectangles, circles, text). This allows manipulation of those frames but without manipulating &amp;ldquo;pixels&amp;rdquo; from python, which would require costly memory transfers between GPU and device RAM.&lt;/p&gt;
+&lt;figure&gt;&lt;img src=&#34;http://localhost:1313/images/maskcam/maskcam_pipeline.avif&#34;
+    alt=&#34;Diagram of the video pipeline that runs the object detector and tracker&#34; width=&#34;100%&#34;&gt;&lt;figcaption&gt;
+      &lt;p&gt;Video pipeline that runs the Deepstream object detector and python tracker&lt;/p&gt;
+    &lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;In summary, this allowed us to:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Run an object tracker (Norfair) entirely in Python, using only the metadata (e.g., object coordinates) from the DeepStream pipeline.&lt;/li&gt;
+&lt;li&gt;Avoid costly memory transfers by never copying video frames back to RAM.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;not-only-computer-vision&#34; &gt;
+&lt;div&gt;
+    &lt;a href=&#34;#not-only-computer-vision&#34;&gt;
+        ##
+    &lt;/a&gt;
+    Not only Computer Vision
+&lt;/div&gt;
+&lt;/h3&gt;
+&lt;p&gt;The complete system also needed to handle a bunch of tasks aside of object detection and tracking. We had to run 5 different Python processes in order to meet all the required features for our smart camera.&lt;/p&gt;
+&lt;p&gt;So we used Python multiprocessing to orchestrate these processes:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;DeepStream Pipeline + Object Tracker: Runs object detection, tracks objects with Norfair, and generates metadata.&lt;/li&gt;
+&lt;li&gt;Streaming Server: Streams live video with drawn detections to remote users.&lt;/li&gt;
+&lt;li&gt;Video chunks saver: Saves video segments to a RAM filesystem for temporary storage, with the option to copy segments to disk on alert or remote command.&lt;/li&gt;
+&lt;li&gt;Static Web Server: Allows remote users to download saved video chunks as MP4 files.&lt;/li&gt;
+&lt;li&gt;Orchestrator: Coordinates the above processes, communicates with a remote MQTT server for statistics and command handling, and ensures seamless operation.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;figure&gt;&lt;img src=&#34;http://localhost:1313/images/maskcam/maskcam_processes.avif&#34;
+    alt=&#34;Python processes orchestrated&#34; width=&#34;100%&#34;&gt;&lt;figcaption&gt;
+      &lt;p&gt;Multiple python processes running in parallel managed by the orchestrator&lt;/p&gt;
+    &lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;By delegating tasks to separate processes, the system achieved high performance while maintaining the flexibility of Python. Each process could be enabled, disabled, or restarted independently, enabling robust system behavior and faster development cycle.&lt;/p&gt;
+&lt;h2 id=&#34;results&#34; &gt;
+&lt;div&gt;
+    &lt;a href=&#34;#results&#34;&gt;
+        #
+    &lt;/a&gt;
+    Results
+&lt;/div&gt;
+&lt;/h2&gt;
+&lt;p&gt;In just four months, this approach enabled the creation of a real-time computer vision system capable of:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Detecting and tracking objects on live video.&lt;/li&gt;
+&lt;li&gt;Streaming video with overlays to remote users.&lt;/li&gt;
+&lt;li&gt;Saving and managing video chunks efficiently.&lt;/li&gt;
+&lt;li&gt;Providing a web interface for downloading videos.&lt;/li&gt;
+&lt;li&gt;Seamlessly integrating with a remote MQTT server for commands and monitoring.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;This project highlights the power of combining Python and C++. Python’s high-level simplicity enabled fast development and orchestration, while C++ (via DeepStream) ensured the high performance needed for video processing. Developing this system in pure C++ would have been a monumental task, especially with just one full-time engineer and a tight four-month deadline.&lt;/p&gt;
+&lt;p&gt;Instead, this hybrid approach delivered:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;Faster development:&lt;/strong&gt; Writing orchestration logic in Python is orders of magnitude faster than C++.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;High performance:&lt;/strong&gt; DeepStream’s optimized C++ backend handled the most resource-intensive operations efficiently.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Resource efficiency:&lt;/strong&gt; By using metadata and GPU, we avoided bottlenecks like memory copies or pickling.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Flexibility:&lt;/strong&gt; Running a Python tracker on top of a low-level inference engine for object detection.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;learn-more&#34; &gt;
+&lt;div&gt;
+    &lt;a href=&#34;#learn-more&#34;&gt;
+        #
+    &lt;/a&gt;
+    Learn More
+&lt;/div&gt;
+&lt;/h2&gt;
+&lt;p&gt;For a deeper dive into the technical details and to see the full system architecture (with beautiful diagrams!), check out the &lt;a href=&#34;https://tryolabs.com/blog/2021/03/17/releasing-maskcam-an-open-source-smart-camera-based-around-jetson-nano&#34;&gt;original Tryolabs blogpost here&lt;/a&gt;. You can also explore the complete codebase on the &lt;a href=&#34;https://github.com/bdtinc/maskcam&#34;&gt;GitHub repository&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;This project is a testament to the power of combining Python’s flexibility with C++’s performance. It proves that even with constrained hardware, it’s possible to achieve high performance and scalability—without sacrificing development speed.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

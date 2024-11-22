@@ -30,6 +30,7 @@ theme = "anubis2"
 			weight = 4
         
 [params]
+mainSections = ["post"]
 copyright = "&#xA9; 2024 by Braulio Ríos. All Rights Reserved."
 google_ad_client = "ca-pub-******"
 ga4 = "G-******"

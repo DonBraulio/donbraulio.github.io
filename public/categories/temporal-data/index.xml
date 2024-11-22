@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Temporal Data on Braulio Ríos - Development Blog</title>
+    <link>/categories/temporal-data/</link>
+    <description>Braulio Ríos - Development Blog (Temporal Data)</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    
+
+    
+    <lastBuildDate>Fri, 22 Nov 2024 13:00:51 -0300</lastBuildDate>
+    
+    <atom:link href="/categories/temporal-data/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Lessons from Building ‘Pandas for Temporal Data’ with Google</title>
+      <link>/posts/temporian/</link>
+      <pubDate>Fri, 22 Nov 2024 13:00:51 -0300</pubDate>
+      
+      <guid>/posts/temporian/</guid>
+      <description>&lt;p&gt;Time-series data is everywhere, from tracking user behavior to monitoring IoT sensors. Last year, while working at Tryolabs, I had the privilege of collaborating with Google to build an open-source Python library named Temporian. If Pandas is the go-to library for tabular data, Temporian aims to fill that role for temporal data.&lt;/p&gt;
+&lt;figure&gt;&lt;img src=&#34;http://localhost:1313/images/temporian/temporian_diagram.avif&#34;
+    alt=&#34;Diagram showing Temporian as part of a data pipeline&#34; width=&#34;70%&#34;&gt;&lt;figcaption&gt;
+      &lt;p&gt;The role of Temporian in a data pipeline.&lt;/p&gt;
+    &lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;Here’s a glimpse into my experience as a developer on this incredible project and the lessons I learned along the way.&lt;/p&gt;
+&lt;h2 id=&#34;the-problem&#34; &gt;
+&lt;div&gt;
+    &lt;a href=&#34;#the-problem&#34;&gt;
+        #
+    &lt;/a&gt;
+    The Problem
+&lt;/div&gt;
+&lt;/h2&gt;
+&lt;p&gt;There are many libraries for time-series preprocessing, but Temporian is for time-sequences in general. The difference is subtle, a time-series is uniformly sampled (i.e: has a fixed sampling rate), while a time-sequence is just a set of events sampled at any possible timestamp.&lt;/p&gt;
+&lt;figure&gt;&lt;img src=&#34;http://localhost:1313/images/temporian/temporian_data.avif&#34;
+    alt=&#34;Different types of temporal data&#34; width=&#34;70%&#34;&gt;&lt;figcaption&gt;
+      &lt;p&gt;Basically anything with a timestamp can be thought as an event in a time-sequence.&lt;/p&gt;
+    &lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;There are also libraries particularly for univariate data, or only numerical data, among other particularities.
+But Temporian is intended to allow modeling anything with a timestamp, basically:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Uniformly and non-uniformly sampled data&lt;/li&gt;
+&lt;li&gt;Single and multi-source events&lt;/li&gt;
+&lt;li&gt;Complex multivariate time-sequences&lt;/li&gt;
+&lt;/ul&gt;
+&lt;figure&gt;&lt;img src=&#34;http://localhost:1313/images/temporian/temporian_plots.avif&#34;
+    alt=&#34;Plots with different types of temporal data&#34; width=&#34;100%&#34;&gt;&lt;figcaption&gt;
+      &lt;p&gt;Different types of temporal data.&lt;/p&gt;
+    &lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;On top of that, it&amp;rsquo;s intended to be blisteringly fast even with tons of data. I mean, it&amp;rsquo;s backed by Google. So the engineering design is an important aspect, as well as writing the critical parts in C++ to optimize processing.&lt;/p&gt;
+&lt;p&gt;Finally, it&amp;rsquo;s intended to avoid common mistakes when handling temporal data, which usually arise when other libraries like pandas or numpy are adapted for these purposes. The most common mistake (precisely because it&amp;rsquo;s hard to spot sometimes) is future leakage. Which means leaking data from events in the future, to build features if previous events. Temporian is specifically designed in a way that avoids that, ensuring robust, error-free feature engineering—essential for machine learning applications.&lt;/p&gt;
+&lt;h3 id=&#34;from-python-to-c-and-beyond&#34; &gt;
+&lt;div&gt;
+    &lt;a href=&#34;#from-python-to-c-and-beyond&#34;&gt;
+        ##
+    &lt;/a&gt;
+    From Python to C++ and Beyond
+&lt;/div&gt;
+&lt;/h3&gt;
+&lt;p&gt;For me as a developer, there were many interesting challenges in this project, from which I learned a lot:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Writing Performant Operators in C++&lt;/strong&gt;:
+One contribution I particularly remember was the &lt;code&gt;tick_calendar&lt;/code&gt; operator, which generates timestamps using a cron-like syntax (e.g., “every day at 2:15 AM”). This required diving deep into C++ for optimal performance—a challenging but deeply rewarding experience.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Ensuring Quality&lt;/strong&gt;:
+Working with Google’s open-source standards meant adhering to the highest levels of code quality and test-driven development. Every release was meticulously reviewed to match the rigor of libraries like Pandas or NumPy.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Intuitive Design through UX Testing&lt;/strong&gt;:
+Another highlight of the project was our focus on usability. We created test protocols that challenged developers to solve problems using Temporian’s documentation alone. Watching real users interact with our library revealed surprising gaps—and ultimately shaped a much better product.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;what-i-learned&#34; &gt;
+&lt;div&gt;
+    &lt;a href=&#34;#what-i-learned&#34;&gt;
+        #
+    &lt;/a&gt;
+    What I Learned
+&lt;/div&gt;
+&lt;/h2&gt;
+&lt;p&gt;Each of the points mentioned above can be mapped to some specific learnings:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Cross-Language Development is a Superpower: Again, combining Python for ease of use and fast development and C++ for performance.&lt;/li&gt;
+&lt;li&gt;Test-Driven Development is Non-Negotiable: When building a library meant to last, rigorous testing isn’t just a good practice—it’s the foundation.&lt;/li&gt;
+&lt;li&gt;User Feedback is Priceless: Designing for intuition is hard. Real-world testing with developers showed how they interpreted our documentation and APIs, often in ways we didn’t expect.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;final-thoughts&#34; &gt;
+&lt;div&gt;
+    &lt;a href=&#34;#final-thoughts&#34;&gt;
+        #
+    &lt;/a&gt;
+    Final thoughts
+&lt;/div&gt;
+&lt;/h2&gt;
+&lt;p&gt;Temporian is open-source, hosted on &lt;a href=&#34;https://github.com/google/temporian&#34;&gt;Google’s GitHub&lt;/a&gt; repository, and even announced on &lt;a href=&#34;https://blog.tensorflow.org/2023/09/forecasting-with-tensorflow-decision-forests-and-temporian.html&#34;&gt;Google’s TensorFlow blog&lt;/a&gt; as a complement for ML pipelines. Seeing the library achieve this level of impact is one of the most gratifying experiences of my career.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
