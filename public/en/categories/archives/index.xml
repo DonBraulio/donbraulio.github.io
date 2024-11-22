@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Archives on DonBraulio - Development Blog</title>
+    <link>/en/categories/archives/</link>
+    <description>DonBraulio - Development Blog (Archives)</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    
+
+    
+    <lastBuildDate>Mon, 04 Nov 2024 17:23:04 -0300</lastBuildDate>
+    
+    <atom:link href="/en/categories/archives/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Contact</title>
+      <link>/en/page/contact/</link>
+      <pubDate>Mon, 04 Nov 2024 17:23:04 -0300</pubDate>
+      
+      <guid>/en/page/contact/</guid>
+      <description>&lt;p&gt;Feel free to reach out!&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;i class=&#34;fa fa-envelope&#34;&gt;&lt;/i&gt; &lt;strong&gt;Email&lt;/strong&gt;: &lt;a href=&#34;mailto:braulioriosf@gmail.com&#34;&gt;braulioriosf@gmail.com&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;i class=&#34;fa-brands fa-linkedin&#34;&gt;&lt;/i&gt; &lt;strong&gt;LinkedIn&lt;/strong&gt;: &lt;a href=&#34;https://www.linkedin.com/in/braulio-rios/&#34;&gt;linkedin.com/in/braulio-rios&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;i class=&#34;fa-brands fa-github&#34;&gt;&lt;/i&gt; &lt;strong&gt;GitHub&lt;/strong&gt;: &lt;a href=&#34;https://github.com/DonBraulio/&#34;&gt;github.com/DonBraulio&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -2,17 +2,27 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>http://localhost:1313/en/</loc>
-    <lastmod>2024-11-04T16:33:21-03:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/en/posts/first-post/</loc>
-    <lastmod>2024-11-04T16:33:21-03:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/en/posts/</loc>
-    <lastmod>2024-11-04T16:33:21-03:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/en/categories/</loc>
-  </url><url>
-    <loc>http://localhost:1313/en/tags/</loc>
-  </url>
+        <loc>http://localhost:1313/en/</loc>
+        <lastmod>2024-11-21T13:44:18-03:00</lastmod>
+      </url><url>
+        <loc>http://localhost:1313/en/posts/</loc>
+        <lastmod>2024-11-21T13:44:18-03:00</lastmod>
+      </url><url>
+        <loc>http://localhost:1313/en/posts/maskcam/</loc>
+        <lastmod>2024-11-21T13:44:18-03:00</lastmod>
+      </url><url>
+        <loc>http://localhost:1313/en/categories/archives/</loc>
+        <lastmod>2024-11-04T17:23:04-03:00</lastmod>
+      </url><url>
+        <loc>http://localhost:1313/en/categories/</loc>
+        <lastmod>2024-11-04T17:23:04-03:00</lastmod>
+      </url><url>
+        <loc>http://localhost:1313/en/page/contact/</loc>
+        <lastmod>2024-11-04T17:23:04-03:00</lastmod>
+      </url><url>
+        <loc>http://localhost:1313/en/page/</loc>
+        <lastmod>2024-11-04T17:23:04-03:00</lastmod>
+      </url><url>
+        <loc>http://localhost:1313/en/tags/</loc>
+      </url>
 </urlset>

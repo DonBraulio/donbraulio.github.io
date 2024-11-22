@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+
+
+<html lang="en-us" data-theme="">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    
+        
+<meta charset="utf-8">
+<meta name="HandheldFriendly" content="True">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="referrer" content="no-referrer-when-downgrade">
+
+<title>Python and C&#43;&#43; ❤️ (I): Embedded Computer Vision and Tracking - Braulio Ríos - Development Blog</title>
+
+<meta name="description" content="
+      Assembled smart camera that runs the computer vision pipeline
+    
+
+
+Here&rsquo;s an interesting project I worked on some time ago: a real-time computer vision system on a constrained embedded device. It required combining a high-level language like Python for fast development cycles, with the C&#43;&#43; components of NVIDIA&rsquo;s DeepStream which leverage GPU-accelerated processing.
+I was the developer for this project while working at Tryolabs. It was a collaboration with BDTI and led to a talk at NVIDIA&rsquo;s GTC that we delivered together with Evan Juras, the hardware engineer.">
+
+
+
+
+
+<link rel="icon" type="image/x-icon" href="http://localhost:1313/favicon.ico">
+<link rel="apple-touch-icon-precomposed" href="http://localhost:1313/favicon.png">
+
+
+
+
+
+
+
+
+    
+
+
+
+<style>
+  body {
+    visibility: hidden;
+    opacity: 0;
+  }
+</style>
+
+<noscript>
+  <style>
+    body {
+      visibility: visible;
+      opacity: 1;
+    }
+  </style>
+</noscript>
+
+
+
+
+    
+
+
+
+
+
+    
+    
+    
+
+    
+        <link rel="stylesheet" href="/css/style.4c42aa0abeac804c4933c54677c449cea1f723caae778425d031e98565a0cdef.css" integrity="sha256-TEKqCr6sgExJM8VGd8RJzqH3I8qud4Ql0DHphWWgze8=">
+    
+
+
+
+
+
+    
+
+
+
+
+
+    
+    
+    
+
+    
+        <link rel="stylesheet" href="/css/style.9c1888ebff42c0224ce04dac10cb2c401f1b77f54f78e8d87d73c3bed781c263.css" integrity="sha256-nBiI6/9CwCJM4E2sEMssQB8bd/VPeOjYfXPDvteBwmM=">
+    
+
+
+
+
+
+    
+
+
+
+
+
+    
+    
+    
+
+    
+        <link rel="stylesheet" href="/css/style.acd606c0fce58853afe0248d37bb41acbbcdd8b1aca2412b6c0fa760da0137f3.css" integrity="sha256-rNYGwPzliFOv4CSNN7tBrLvN2LGsokErbA&#43;nYNoBN/M=">
+    
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+    
+
+
+
+
+
+    
+    
+    
+
+    
+        <script src="/js/script.672e2309c296e07c18bcd08b28d797a56222ff941d65f308fba3158c44885b14.js" type="text/javascript" charset="utf-8" integrity="sha256-Zy4jCcKW4HwYvNCLKNeXpWIi/5QdZfMI&#43;6MVjESIWxQ="></script>
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+</head>
+<body>
+    <a class="skip-main" href="#main">Skip to main content</a>
+    <div class="container">
+        <header class="common-header">
+            
+                <div class="header-top">
+    <div class="header-top-left">
+        <h1 class="site-title noselect">
+    <a href="/">Braulio Ríos - Development Blog</a>
+</h1>
+
+        
+
+
+
+
+
+
+
+    
+        <div class="theme-switcher">
+            <span class="inline-svg">
+
+    
+
+
+    
+    
+    
+    
+    
+
+    <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-sun-high"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M14.828 14.828a4 4 0 1 0 -5.656 -5.656a4 4 0 0 0 5.656 5.656z" /><path d="M6.343 17.657l-1.414 1.414" /><path d="M6.343 6.343l-1.414 -1.414" /><path d="M17.657 6.343l1.414 -1.414" /><path d="M17.657 17.657l1.414 1.414" /><path d="M4 12h-2" /><path d="M12 4v-2" /><path d="M20 12h2" /><path d="M12 20v2" /></svg>
+
+
+</span>
+
+        </div>
+    
+
+    <script>
+        const STORAGE_KEY = 'user-color-scheme'
+        const defaultTheme = "light"
+
+        let currentTheme
+        let switchButton
+        let autoDefinedScheme = window.matchMedia('(prefers-color-scheme: dark)')
+
+        function switchTheme(e) {
+            currentTheme = (currentTheme === 'dark') ? 'light' : 'dark';
+            if (localStorage) localStorage.setItem(STORAGE_KEY, currentTheme);
+            document.documentElement.setAttribute('data-theme', currentTheme);
+            changeGiscusTheme(currentTheme);
+            document.body.dispatchEvent(new CustomEvent(currentTheme + "-theme-set"));
+        }
+
+        const autoChangeScheme = e => {
+            currentTheme = e.matches ? 'dark' : 'light'
+            document.documentElement.setAttribute('data-theme', currentTheme);
+            changeGiscusTheme(currentTheme);
+            document.body.dispatchEvent(new CustomEvent(currentTheme + "-theme-set"));
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            switchButton = document.querySelector('.theme-switcher')
+            currentTheme = detectCurrentScheme()
+
+            if (currentTheme === 'auto') {
+                autoChangeScheme(autoDefinedScheme);
+                autoDefinedScheme.addListener(autoChangeScheme);
+            } else {
+                document.documentElement.setAttribute('data-theme', currentTheme)
+            }
+
+            if (switchButton) {
+                switchButton.addEventListener('click', switchTheme, false)
+            }
+
+            showContent();
+        })
+
+        function detectCurrentScheme() {
+            if (localStorage !== null && localStorage.getItem(STORAGE_KEY)) {
+                return localStorage.getItem(STORAGE_KEY)
+            }
+            if (defaultTheme) {
+                return defaultTheme
+            }
+            return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        }
+
+        function showContent() {
+            document.body.style.visibility = 'visible';
+            document.body.style.opacity = 1;
+        }
+
+        function changeGiscusTheme (theme) {
+            function sendMessage(message) {
+              const iframe = document.querySelector('iframe.giscus-frame');
+              if (!iframe) return;
+              iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+            }
+
+            sendMessage({
+              setConfig: {
+                theme: theme
+              }
+            });
+        }
+    </script>
+
+
+        <ul class="social-icons noselect">
+
+
+
+
+
+
+
+    
+
+</ul>
+
+    </div>
+    <div class="header-top-right">
+
+    </div>
+</div>
+
+
+    <nav class="noselect">
+        
+        
+        <a class="" href="http://localhost:1313/" title="">Home</a>
+        
+        <a class="" href="http://localhost:1313/categories/" title="">Categories</a>
+        
+        <a class="" href="http://localhost:1313/tags/" title="">Tags</a>
+        
+        <a class="" href="http://localhost:1313/page/contact/" title="">Contact</a>
+        
+    </nav>
+
+
+
+
+
+
+
+
+            
+        </header>
+        <main id="main" tabindex="-1">
+            
+    
+
+    <article class="post h-entry">
+        <div class="post-header">
+            <header>
+                <h1 class="p-name post-title">Python and C++ ❤️ (I): Embedded Computer Vision and Tracking</h1>
+                
+
+            </header>
+            
+
+
+
+<div class="post-info noselect">
+    
+        <div class="post-date dt-published">
+            <time datetime="2024-11-21">2024-11-21</time>
+            
+        </div>
+    
+
+    <a class="post-hidden-url u-url" href="/posts/maskcam/">/posts/maskcam/</a>
+    <a href="http://localhost:1313/" class="p-name p-author post-hidden-author h-card" rel="me"></a>
+
+
+    <div class="post-taxonomies">
+        
+            <ul class="post-categories">
+                
+                    
+                    <li><a href="/categories/archives/">Archives</a></li>
+                
+            </ul>
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+        
+
+  
+  
+
+
+
+
+  
+  
+  
+  <details class="toc noselect">
+    <summary>Table of Contents</summary>
+    <div class="inner"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#challenge">Challenge</a></li>
+    <li><a href="#solution">Solution</a>
+      <ul>
+        <li><a href="#not-only-computer-vision">Not only Computer Vision</a></li>
+      </ul>
+    </li>
+    <li><a href="#results">Results</a></li>
+    <li><a href="#learn-more">Learn More</a></li>
+  </ul>
+</nav></div>
+  </details>
+  
+
+
+
+<script>
+  var toc = document.querySelector(".toc");
+  if (toc) {
+    toc.addEventListener("click", function () {
+      if (event.target.tagName !== "A") {
+        event.preventDefault();
+        if (this.open) {
+          this.open = false;
+          this.classList.remove("expanded");
+        } else {
+          this.open = true;
+          this.classList.add("expanded");
+        }
+      }
+    });
+  }
+</script>
+
+        <div class="content e-content">
+            <figure><img src="/images/maskcam/maskcam_hardware.avif"
+    alt="Hardware for the smart camera" width="70%"><figcaption>
+      <p>Assembled smart camera that runs the computer vision pipeline</p>
+    </figcaption>
+</figure>
+
+<p>Here&rsquo;s an interesting project I worked on some time ago: a real-time computer vision system on a constrained embedded device. It required combining a high-level language like Python for fast development cycles, with the C++ components of NVIDIA&rsquo;s DeepStream which leverage GPU-accelerated processing.</p>
+<p>I was the developer for this project while working at <a href="https://tryolabs.com">Tryolabs</a>. It was a collaboration with <a href="https://bdti.com">BDTI</a> and led to a talk at <a href="https://www.nvidia.com/en-us/on-demand/session/gtcspring21-s32588/">NVIDIA&rsquo;s GTC</a> that we delivered together with Evan Juras, the hardware engineer.</p>
+<p>Let&rsquo;s dive into some interesting technical aspects of this full-fledged video pipeline capable of object detection, tracking, video streaming, storage management, and remote control—all running in harmony on a compact embedded device. Here’s how it works.</p>
+<h2 id="challenge" >
+<div>
+    <a href="#challenge">
+        #
+    </a>
+    Challenge
+</div>
+</h2>
+<p>NVIDIA&rsquo;s Jetson Nano, while affordable and accessible (USD 90 at the time), is constrained in terms of memory (4GB of RAM) and CPU resources. Developing a system capable of handling multiple tasks—including computer vision, streaming, and storage management—requires efficient memory management, GPU processing, and robust orchestration of parallel processes.</p>
+<p>Pure Python solutions fall short here:</p>
+<ul>
+<li>The Global Interpreter Lock (GIL) limits true multithreading.</li>
+<li>Multiprocessing requires inter-process communication, which can add significant overhead.</li>
+<li>Handling raw video frames often involves costly memory copies between GPU and RAM.</li>
+</ul>
+<p>On the flip side, writing the entire pipeline in C++ would be time-intensive and inflexible. To bridge this gap, we combined Python’s development speed with C++’s performance through NVIDIA DeepStream’s Python bindings.</p>
+<h2 id="solution" >
+<div>
+    <a href="#solution">
+        #
+    </a>
+    Solution
+</div>
+</h2>
+<p>DeepStream serves as the backbone of the pipeline, handling video processing and object detection using highly optimized GPU-accelerated modules. The pipeline was defined in Python, but all the heavy lifting—frame decoding, inference, and metadata generation—happens in DeepStream’s C++-optimized core.</p>
+<p>But also, I was working at Tryolabs at the time, and we had our standout tracker library <a href="https://tryolabs.com/blog/2020/09/10/releasing-norfair-an-open-source-library-for-object-tracking">Norfair</a> which is entirely written in Python. Naturally, we wanted to use it—not only because it’s awesome but also because we had deep expertise in its inner workings and personally knew every Kalman Filter involved.</p>
+<p>This was an interesting challenge, because we needed real-time access to the detections but without access to the video frames, which were deep down flowing through the GPU. And even more, then we needed to draw the bounding boxes of the smoothed tracker detections back in the frame.</p>
+<p>Long story short, we were able to solve this by probing the video pipeline after the object detection model, in order to access the detections metadata. This allowed us to extract the object coordinates from Python and feed them into our Norfair tracker. Then, we had to draw the tracker objects into the frame, by using Deepstream&rsquo;s drawing component, which basically receives a series of commands to draw different shapes into the video frames (e.g: rectangles, circles, text). This allows manipulation of those frames but without manipulating &ldquo;pixels&rdquo; from python, which would require costly memory transfers between GPU and device RAM.</p>
+<figure><img src="/images/maskcam/maskcam_pipeline.avif"
+    alt="Diagram of the video pipeline that runs the object detector and tracker" width="100%"><figcaption>
+      <p>Video pipeline that runs the Deepstream object detector and python tracker</p>
+    </figcaption>
+</figure>
+
+<p>In summary, this allowed us to:</p>
+<ul>
+<li>Run an object tracker (Norfair) entirely in Python, using only the metadata (e.g., object coordinates) from the DeepStream pipeline.</li>
+<li>Avoid costly memory transfers by never copying video frames back to RAM.</li>
+</ul>
+<h3 id="not-only-computer-vision" >
+<div>
+    <a href="#not-only-computer-vision">
+        ##
+    </a>
+    Not only Computer Vision
+</div>
+</h3>
+<p>The complete system didn&rsquo;t only need to run the object detection and tracker system. We had to run 5 different Python processes in order to meet all the required features for our smart camera.</p>
+<p>So we used Python multiprocessing to orchestrate these processes:</p>
+<ol>
+<li>DeepStream Pipeline + Object Tracker: Runs object detection, tracks objects with Norfair, and generates metadata.</li>
+<li>Streaming Server: Streams live video with drawn detections to remote users.</li>
+<li>Video chunks saver: Saves video segments to a RAM filesystem for temporary storage, with the option to copy segments to disk on alert or remote command.</li>
+<li>Static Web Server: Allows remote users to download saved video chunks as MP4 files.</li>
+<li>Orchestrator: Coordinates the above processes, communicates with a remote MQTT server for statistics and command handling, and ensures seamless operation.</li>
+</ol>
+<figure><img src="/images/maskcam/maskcam_processes.avif"
+    alt="Python processes orchestrated" width="100%"><figcaption>
+      <p>Multiple python processes running in parallel managed by the orchestrator</p>
+    </figcaption>
+</figure>
+
+<p>By delegating tasks to separate processes, the system achieved high performance while maintaining the flexibility of Python. Each process could be enabled, disabled, or restarted independently, enabling robust system behavior and faster development cycle.</p>
+<h2 id="results" >
+<div>
+    <a href="#results">
+        #
+    </a>
+    Results
+</div>
+</h2>
+<p>In just four months, this approach enabled the creation of a real-time computer vision system capable of:</p>
+<ul>
+<li>Detecting and tracking objects on live video.</li>
+<li>Streaming video with overlays to remote users.</li>
+<li>Saving and managing video chunks efficiently.</li>
+<li>Providing a web interface for downloading videos.</li>
+<li>Seamlessly integrating with a remote MQTT server for commands and monitoring.</li>
+</ul>
+<p>This project highlights the power of combining Python and C++. Python’s high-level simplicity enabled fast development and orchestration, while C++ (via DeepStream) ensured the high performance needed for video processing. Developing this system in pure C++ would have been a monumental task, especially with just one full-time engineer and a tight four-month deadline.</p>
+<p>Instead, this hybrid approach delivered:</p>
+<ol>
+<li><strong>Faster development:</strong> Writing orchestration logic in Python is orders of magnitude faster than C++.</li>
+<li><strong>High performance:</strong> DeepStream’s optimized C++ backend handled the most resource-intensive operations efficiently.</li>
+<li><strong>Resource efficiency:</strong> By using metadata and GPU, we avoided bottlenecks like memory copies or pickling.</li>
+<li><strong>Flexibility:</strong> Running a Python tracker on top of a low-level inference engine for object detection.</li>
+</ol>
+<h2 id="learn-more" >
+<div>
+    <a href="#learn-more">
+        #
+    </a>
+    Learn More
+</div>
+</h2>
+<p>For a deeper dive into the technical details and to see the full system architecture (with beautiful diagrams!), check out the <a href="https://tryolabs.com/blog/2021/03/17/releasing-maskcam-an-open-source-smart-camera-based-around-jetson-nano">original Tryolabs blogpost here</a>. You can also explore the complete codebase on the <a href="https://github.com/bdtinc/maskcam">GitHub repository</a>.</p>
+<p>This project is a testament to the power of combining Python’s flexibility with C++’s performance. It proves that even with constrained hardware, it’s possible to achieve high performance and scalability—without sacrificing development speed.</p>
+
+        </div>
+
+    </article>
+
+    
+    
+
+    
+        
+        
+    
+
+    
+
+    
+        
+
+
+
+
+
+
+
+
+
+    
+
+    
+
+    
+
+    
+
+        </main>
+        
+            <footer class="common-footer noselect">
+    
+    
+
+    <div class="common-footer-bottom">
+        
+
+        <div style="display: flex; align-items: center; gap:8px">
+            ©  2024
+            
+        </div>
+        <div style="display:flex;align-items: center">
+            
+            
+            
+            
+            
+            
+        </div>
+        <div>
+            Powered by <a target="_blank" rel="noopener noreferrer" href="https://gohugo.io/">Hugo</a>, theme <a target="_blank" rel="noopener noreferrer" href="https://github.com/Junyi-99/hugo-theme-anubis2">Anubis2</a>.<br>
+            
+
+        </div>
+    </div>
+
+    <p class="h-card vcard">
+
+    <a href=http://localhost:1313/ class="p-name u-url url fn" rel="me"></a>
+
+    
+
+    
+</p>
+
+</footer>
+
+        
+    </div>
+</body>
+</html>

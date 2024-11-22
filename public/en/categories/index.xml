@@ -2,10 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Categories on DonBraulio - Development Blog</title>
-    <link>http://localhost:1313/en/categories/</link>
-    <description>Recent content in Categories on DonBraulio - Development Blog</description>
-    <generator>Hugo</generator>
+    <link>/en/categories/</link>
+    <description>DonBraulio - Development Blog (Categories)</description>
+    <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <atom:link href="http://localhost:1313/en/categories/index.xml" rel="self" type="application/rss+xml" />
+    
+
+    
+    <lastBuildDate>Mon, 04 Nov 2024 17:23:04 -0300</lastBuildDate>
+    
+    <atom:link href="/en/categories/index.xml" rel="self" type="application/rss+xml" />
+    
+    
   </channel>
 </rss>

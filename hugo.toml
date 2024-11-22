@@ -2,19 +2,15 @@ baseURL = "https://donbraulio.github.io/"
 languageCode = 'en-us'
 title = "Lamparilla 💡"
 
-defaultContentLanguage = "en"
-defaultContentLanguageInSubdir = true
 
-staticDir = ["static", "themes/Niello/static"]
-
-theme = "Niello"
+theme = "anubis2"
 
 [languages]
 	[languages.en]
-		title = "DonBraulio - Development Blog"
+		title = "Braulio Ríos - Development Blog"
 		languageCode = "en-us"
 		LanguageName = "🇺🇸EN"
-		contentDir = "content/en"
+		contentDir = "content"
 		weight = 1
 		[[languages.en.menus.main]]
 			name = 'Home'
@@ -30,7 +26,7 @@ theme = "Niello"
 			weight = 3
 		[[languages.en.menus.main]]
 			name = 'Contact'
-			pageRef = '/contact'
+			pageRef = '/page/contact'
 			weight = 4
         
 [params]
