@@ -10,15 +10,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="referrer" content="no-referrer-when-downgrade">
 
-<title>Python and C&#43;&#43; ❤️ (I): Embedded Computer Vision and Tracking - Braulio Ríos - Development Blog</title>
+<title>Python ❤️ C&#43;&#43; for Embedded Computer Vision and Tracking - Braulio Ríos - Development Blog</title>
 
 <meta name="description" content="
       Assembled smart camera that runs the computer vision pipeline
     
 
 
-Here&rsquo;s an interesting project I worked on some time ago: a real-time computer vision system on a constrained embedded device. It required combining a high-level language like Python for fast development cycles, with the C&#43;&#43; components of NVIDIA&rsquo;s DeepStream which leverage GPU-accelerated processing.
-I was the developer for this project while working at Tryolabs. It was a collaboration with BDTI and led to a talk at NVIDIA&rsquo;s GTC that we delivered together with Evan Juras, the hardware engineer.">
+Here&rsquo;s an interesting Open Source project I worked on some time ago: a real-time computer vision system on a constrained embedded device. It required combining a high-level language (Python) to tackle all the requirements (remote server comm, streaming, file sharing), with the C&#43;&#43; components of NVIDIA&rsquo;s DeepStream which leverage GPU-accelerated processing.
+Let&rsquo;s dive into some interesting technical aspects of this full-fledged video pipeline capable of object detection, tracking, video streaming, storage management, and remote control—all running in harmony on a compact embedded device. Here’s how it works.">
 
 
 
@@ -314,7 +314,7 @@ I was the developer for this project while working at Tryolabs. It was a collabo
     <article class="post h-entry">
         <div class="post-header">
             <header>
-                <h1 class="p-name post-title">Python and C++ ❤️ (I): Embedded Computer Vision and Tracking</h1>
+                <h1 class="p-name post-title">Python ❤️ C++ for Embedded Computer Vision and Tracking</h1>
                 
 
             </header>
@@ -404,9 +404,9 @@ I was the developer for this project while working at Tryolabs. It was a collabo
     </figcaption>
 </figure>
 
-<p>Here&rsquo;s an interesting project I worked on some time ago: a real-time computer vision system on a constrained embedded device. It required combining a high-level language like Python for fast development cycles, with the C++ components of NVIDIA&rsquo;s DeepStream which leverage GPU-accelerated processing.</p>
-<p>I was the developer for this project while working at <a href="https://tryolabs.com">Tryolabs</a>. It was a collaboration with <a href="https://bdti.com">BDTI</a> and led to a talk at <a href="https://www.nvidia.com/en-us/on-demand/session/gtcspring21-s32588/">NVIDIA&rsquo;s GTC</a> that we delivered together with Evan Juras, the hardware engineer.</p>
+<p>Here&rsquo;s an interesting Open Source project I worked on some time ago: a real-time computer vision system on a constrained embedded device. It required combining a high-level language (Python) to tackle all the requirements (remote server comm, streaming, file sharing), with the C++ components of NVIDIA&rsquo;s DeepStream which leverage GPU-accelerated processing.</p>
 <p>Let&rsquo;s dive into some interesting technical aspects of this full-fledged video pipeline capable of object detection, tracking, video streaming, storage management, and remote control—all running in harmony on a compact embedded device. Here’s how it works.</p>
+<p>I was the developer for this project while working at <a href="https://tryolabs.com">Tryolabs</a>. It was a collaboration with <a href="https://bdti.com">BDTI</a> and led to a talk at <a href="https://www.nvidia.com/en-us/on-demand/session/gtcspring21-s32588/">NVIDIA&rsquo;s GTC</a> that we delivered together with Evan Juras, the hardware engineer.</p>
 <h2 id="challenge" >
 <div>
     <a href="#challenge">
@@ -432,9 +432,9 @@ I was the developer for this project while working at Tryolabs. It was a collabo
 </div>
 </h2>
 <p>DeepStream serves as the backbone of the pipeline, handling video processing and object detection using highly optimized GPU-accelerated modules. The pipeline was defined in Python, but all the heavy lifting—frame decoding, inference, and metadata generation—happens in DeepStream’s C++-optimized core.</p>
-<p>But also, I was working at Tryolabs at the time, and we had our standout tracker library <a href="https://tryolabs.com/blog/2020/09/10/releasing-norfair-an-open-source-library-for-object-tracking">Norfair</a> which is entirely written in Python. Naturally, we wanted to use it—not only because it’s awesome but also because we had deep expertise in its inner workings and personally knew every Kalman Filter involved.</p>
+<p>But also, I was working at Tryolabs at the time, and we had our standout object tracking library <a href="https://tryolabs.com/blog/2020/09/10/releasing-norfair-an-open-source-library-for-object-tracking">Norfair</a> which is entirely written in Python. Naturally, we wanted to use it—not only because it’s awesome but also because we had deep expertise in its inner workings and personally knew every Kalman Filter involved.</p>
 <p>This was an interesting challenge, because we needed real-time access to the detections but without access to the video frames, which were deep down flowing through the GPU. And even more, then we needed to draw the bounding boxes of the smoothed tracker detections back in the frame.</p>
-<p>Long story short, we were able to solve this by probing the video pipeline after the object detection model, in order to access the detections metadata. This allowed us to extract the object coordinates from Python and feed them into our Norfair tracker. Then, we had to draw the tracker objects into the frame, by using Deepstream&rsquo;s drawing component, which basically receives a series of commands to draw different shapes into the video frames (e.g: rectangles, circles, text). This allows manipulation of those frames but without manipulating &ldquo;pixels&rdquo; from python, which would require costly memory transfers between GPU and device RAM.</p>
+<p>Long story short, we were able to solve this by probing the video pipeline after the object detection model, in order to access the detections metadata. This allowed us to process the object coordinates in Python and feed them into our Norfair tracker. Then, we had to draw the tracked objects into the frame, by using Deepstream&rsquo;s drawing component, which basically receives a series of commands to draw different shapes into the video frames (e.g: rectangles, circles, text). This allows manipulation of those frames but without manipulating &ldquo;pixels&rdquo; from python, which would require costly memory transfers between GPU and device RAM.</p>
 <figure><img src="/images/maskcam/maskcam_pipeline.avif"
     alt="Diagram of the video pipeline that runs the object detector and tracker" width="100%"><figcaption>
       <p>Video pipeline that runs the Deepstream object detector and python tracker</p>
@@ -454,7 +454,7 @@ I was the developer for this project while working at Tryolabs. It was a collabo
     Not only Computer Vision
 </div>
 </h3>
-<p>The complete system didn&rsquo;t only need to run the object detection and tracker system. We had to run 5 different Python processes in order to meet all the required features for our smart camera.</p>
+<p>The complete system also needed to handle a bunch of tasks aside of object detection and tracking. We had to run 5 different Python processes in order to meet all the required features for our smart camera.</p>
 <p>So we used Python multiprocessing to orchestrate these processes:</p>
 <ol>
 <li>DeepStream Pipeline + Object Tracker: Runs object detection, tracks objects with Norfair, and generates metadata.</li>
