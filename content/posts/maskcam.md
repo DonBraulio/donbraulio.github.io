@@ -2,27 +2,31 @@
 date = '2024-11-21T13:44:18-03:00'
 draft = false
 title = 'Python and C++ ❤️ (I): Embedded Computer Vision and Tracking'
+type = 'page'
+categories = ["archives"]
 +++
 
-{{< figure src="/images/maskcam/maskcam_jetson.avif" alt="Jetson Nano SOM" caption="Jetson Nano Module" width="50%" >}}
 
-This post is about a project I developed while working at [Tryolabs](https://tryolabs.com). It was a collaboration with [BDTI](https://bdti.com) and led to a talk at [NVIDIA's GTC](https://www.nvidia.com/en-us/on-demand/session/gtcspring21-s32588/) that we delivered together with Evan Juras, the hardware engineer.
+{{< figure src="/images/maskcam/maskcam_hardware.avif" alt="Hardware for the smart camera" caption="Assembled smart camera that runs the computer vision pipeline" width="70%" >}}
 
-It's a very interesting project from a technical standpoint, since building a real-time computer vision system on a constrained embedded device is challenging. Achieving high performance while juggling multiple simultaneous tasks requires a creative blend of technologies. For this project, Python and NVIDIA DeepStream came together to create an efficient, scalable solution that balances the simplicity of a high-level language with the raw power of GPU-accelerated processing.
+Here's an interesting project I worked on some time ago: a real-time computer vision system on a constrained embedded device. It required combining a high-level language like Python for fast development cycles, with the C++ components of NVIDIA's DeepStream which leverage GPU-accelerated processing.
 
-The result is a full-fledged video pipeline capable of object detection, tracking, video streaming, storage management, and remote control—all running in harmony on a compact embedded device. Here’s how it works.
+I was the developer for this project while working at [Tryolabs](https://tryolabs.com). It was a collaboration with [BDTI](https://bdti.com) and led to a talk at [NVIDIA's GTC](https://www.nvidia.com/en-us/on-demand/session/gtcspring21-s32588/) that we delivered together with Evan Juras, the hardware engineer.
+
+Let's dive into some interesting technical aspects of this full-fledged video pipeline capable of object detection, tracking, video streaming, storage management, and remote control—all running in harmony on a compact embedded device. Here’s how it works.
 
 ## Challenge
 NVIDIA's Jetson Nano, while affordable and accessible (USD 90 at the time), is constrained in terms of memory (4GB of RAM) and CPU resources. Developing a system capable of handling multiple tasks—including computer vision, streaming, and storage management—requires efficient memory management, GPU processing, and robust orchestration of parallel processes.
 
 Pure Python solutions fall short here:
-	•	The Global Interpreter Lock (GIL) limits true multithreading.
-	•	Multiprocessing requires inter-process communication, which can add significant overhead.
-	•	Handling raw video frames often involves costly memory copies between GPU and RAM.
+ - The Global Interpreter Lock (GIL) limits true multithreading.
+ - Multiprocessing requires inter-process communication, which can add significant overhead.
+ - Handling raw video frames often involves costly memory copies between GPU and RAM.
 
 On the flip side, writing the entire pipeline in C++ would be time-intensive and inflexible. To bridge this gap, we combined Python’s development speed with C++’s performance through NVIDIA DeepStream’s Python bindings.
 
 ## Solution
+
 
 DeepStream serves as the backbone of the pipeline, handling video processing and object detection using highly optimized GPU-accelerated modules. The pipeline was defined in Python, but all the heavy lifting—frame decoding, inference, and metadata generation—happens in DeepStream’s C++-optimized core.
 
@@ -32,40 +36,43 @@ This was an interesting challenge, because we needed real-time access to the det
 
 Long story short, we were able to solve this by probing the video pipeline after the object detection model, in order to access the detections metadata. This allowed us to extract the object coordinates from Python and feed them into our Norfair tracker. Then, we had to draw the tracker objects into the frame, by using Deepstream's drawing component, which basically receives a series of commands to draw different shapes into the video frames (e.g: rectangles, circles, text). This allows manipulation of those frames but without manipulating "pixels" from python, which would require costly memory transfers between GPU and device RAM.
 
+{{< figure src="/images/maskcam/maskcam_pipeline.avif" alt="Diagram of the video pipeline that runs the object detector and tracker" caption="Video pipeline that runs the Deepstream object detector and python tracker" width="100%" >}}
+
 In summary, this allowed us to:
-	1.	Run an object tracker (Norfair) entirely in Python, using only the metadata (e.g., object coordinates) from the DeepStream pipeline.
-	2.	Avoid costly memory transfers by never copying video frames back to RAM.
+ - Run an object tracker (Norfair) entirely in Python, using only the metadata (e.g., object coordinates) from the DeepStream pipeline.
+ - Avoid costly memory transfers by never copying video frames back to RAM.
 
 ### Not only Computer Vision
 
 The complete system didn't only need to run the object detection and tracker system. We had to run 5 different Python processes in order to meet all the required features for our smart camera.
 
 So we used Python multiprocessing to orchestrate these processes:
+ 1. DeepStream Pipeline + Object Tracker: Runs object detection, tracks objects with Norfair, and generates metadata.
+ 2. Streaming Server: Streams live video with drawn detections to remote users.
+ 3. Video chunks saver: Saves video segments to a RAM filesystem for temporary storage, with the option to copy segments to disk on alert or remote command.
+ 4. Static Web Server: Allows remote users to download saved video chunks as MP4 files.
+ 5. Orchestrator: Coordinates the above processes, communicates with a remote MQTT server for statistics and command handling, and ensures seamless operation.
 
-	1.	DeepStream Pipeline + Object Tracker: Runs object detection, tracks objects with Norfair, and generates metadata.
-	2.	Streaming Server: Streams live video with drawn detections to remote users.
-	3.	Video chunks saver: Saves video segments to a RAM filesystem for temporary storage, with the option to copy segments to disk on alert or remote command.
-	4.	Static Web Server: Allows remote users to download saved video chunks as MP4 files.
-	5.	Orchestrator: Coordinates the above processes, communicates with a remote MQTT server for statistics and command handling, and ensures seamless operation.
+{{< figure src="/images/maskcam/maskcam_processes.avif" alt="Python processes orchestrated" caption="Multiple python processes running in parallel managed by the orchestrator" width="100%" >}}
 
 By delegating tasks to separate processes, the system achieved high performance while maintaining the flexibility of Python. Each process could be enabled, disabled, or restarted independently, enabling robust system behavior and faster development cycle.
 
 ## Results
 
 In just four months, this approach enabled the creation of a real-time computer vision system capable of:
-	•	Detecting and tracking objects on live video.
-	•	Streaming video with overlays to remote users.
-	•	Saving and managing video chunks efficiently.
-	•	Providing a web interface for downloading videos.
-	•	Seamlessly integrating with a remote MQTT server for commands and monitoring.
+ - Detecting and tracking objects on live video.
+ - Streaming video with overlays to remote users.
+ - Saving and managing video chunks efficiently.
+ - Providing a web interface for downloading videos.
+ - Seamlessly integrating with a remote MQTT server for commands and monitoring.
 
 This project highlights the power of combining Python and C++. Python’s high-level simplicity enabled fast development and orchestration, while C++ (via DeepStream) ensured the high performance needed for video processing. Developing this system in pure C++ would have been a monumental task, especially with just one full-time engineer and a tight four-month deadline.
 
 Instead, this hybrid approach delivered:
-	• Faster development: Writing orchestration logic in Python is orders of magnitude faster than C++.
-	• High performance: DeepStream’s optimized C++ backend handled the most resource-intensive operations efficiently.
-	• Resource efficiency: By using metadata and GPU, we avoided bottlenecks like memory copies or pickling.
-    • Flexibility: Running a Python tracker on top of a low-level inference engine for object detection.
+ 1. **Faster development:** Writing orchestration logic in Python is orders of magnitude faster than C++.
+ 1. **High performance:** DeepStream’s optimized C++ backend handled the most resource-intensive operations efficiently.
+ 1. **Resource efficiency:** By using metadata and GPU, we avoided bottlenecks like memory copies or pickling.
+ 1. **Flexibility:** Running a Python tracker on top of a low-level inference engine for object detection.
 
 
 ## Learn More
