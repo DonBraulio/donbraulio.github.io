@@ -2,8 +2,9 @@
 date = '2024-11-21T13:44:18-03:00'
 draft = false
 title = 'Python ❤️ C++ for Embedded Computer Vision and Tracking'
-type = 'page'
-categories = ["archives"]
+type = 'post'
+categories = ["blogpost"]
+tags = ["python","c++","computer vision","machine learning"]
 +++
 
 
@@ -17,6 +18,8 @@ I was the developer for this project while working at [Tryolabs](https://tryolab
 
 ## Challenge
 NVIDIA's Jetson Nano, while affordable and accessible (USD 90 at the time), is constrained in terms of memory (4GB of RAM) and CPU resources. Developing a system capable of handling multiple tasks—including computer vision, streaming, and storage management—requires efficient memory management, GPU processing, and robust orchestration of parallel processes.
+
+{{< figure src="/images/maskcam/maskcam_jetson.png" alt="Jetson Nano SOM" caption="Jetson Nano SOM" width="30%" >}}
 
 Pure Python solutions fall short here:
  - The Global Interpreter Lock (GIL) limits true multithreading.
