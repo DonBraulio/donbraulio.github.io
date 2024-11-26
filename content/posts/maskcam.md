@@ -1,7 +1,7 @@
 +++
 date = '2024-11-21T13:44:18-03:00'
 draft = false
-title = 'Python ❤️ C++ for Embedded Computer Vision and Tracking'
+title = 'Embedded Computer Vision and Tracking in Real Time'
 type = 'post'
 categories = ["blogpost"]
 tags = ["python","c++","computer vision","machine learning"]

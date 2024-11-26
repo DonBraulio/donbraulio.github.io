@@ -7,7 +7,6 @@ categories = ["blogpost"]
 tags = ["python","c++","temporal data","machine learning"]
 +++
 
-
 Time-series data is everywhere, from tracking user behavior to monitoring IoT sensors. Last year, while working at Tryolabs, I had the privilege of collaborating with Google to build an open-source Python library named Temporian. If Pandas is the go-to library for tabular data, Temporian aims to fill that role for temporal data.
 
 {{< figure src="/images/temporian/temporian_diagram.avif" alt="Diagram showing Temporian as part of a data pipeline" caption="The role of Temporian in a data pipeline." width="70%" >}}
