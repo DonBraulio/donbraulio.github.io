@@ -9,19 +9,28 @@ tags = ["startup","commercial","engineering"]
 
 Last year, I co-founded a startup with two colleagues. The experience was incredible and full of unexpected lessons. A month ago, I stepped away from the project, but the process taught me a lot, and I’d like to share some key takeaways.
 
-## Disagree and Keep Moving
+## Disagree but Keep Moving
 
-If you care about results, don't hide your disagreements during decision-making. Startups need to move fast, but avoiding conflict by being agreeable will backfire sooner or later. The key skill co-founders need to master is making decisions quickly while fostering open discussions. While unanimous decisions are ideal after laying out facts and reasoning, sometimes that's not possible and startups often require action before certainty.
+If you care about results, don’t hide your disagreements during decision-making. Startups need to move fast, but avoiding conflict by being overly agreeable will eventually backfire. Co-founders must master the art of making decisions quickly while fostering open discussions. While unanimous decisions are ideal after weighing facts and reasoning, startups often require action before certainty.
 
-When disagreements arise, find ways to break deadlocks—use majority voting, alternating decision-making, or letting the person advocating for a decision take responsibility for its execution (this is often how roles emerge organically).
-Sometimes, the best path isn’t clear without experimentation. A startup thrives on learning through testing, and in many cases, it’s better to make a decision and move forward than to stall in endless debates.
+When disagreements arise, use strategies to break deadlocks: majority voting, alternating decision-making, or letting the person advocating for a choice take responsibility for its execution (this is often how roles emerge organically). Sometimes, the best path isn’t clear without experimentation. Startups need to test and learn, and in many cases, it’s better to act and adjust than to get stuck in endless debates.
 
-I don't think there's a universal formula for balancing speed and discussion. It depends on roles, expertise, leadership styles and individual personalities. But it surely doesn't work if you say "I think that's a good idea" when you're actually thinking "that's a bad idea". Disagreeing openly isn’t a problem; hiding your disagreement is. Open debate and clear accountability lead to better long-term alignment, or quickly reveal when something isn't working.
+There's no universal formula to resolve conflicts into action items. It depends on time available, roles, expertise, leadership styles, and individual personalities. But it surely doesn't work if you say "I think that's a good idea" when you're actually thinking "that's a bad idea". You might even agree to work on a bad idea for a while, but don't hide your discomfort and even more important, don't try to secretly sabotage it and waste everybody's time. The problem isn’t disagreeing openly—it’s hiding your disagreement (not trusting yourself) or being inflexible about working on other people's ideas (not trusting your teammates).
 
-When people are responsible for the outcomes of their decisions, whether good or bad, the team learns and grows more effectively.
-A startup is an incredible opportunity to practice decision-making and learn from the outcomes—whether painful or rewarding. Accountability drives progress, while its absence fosters victimhood and finger-pointing—a fast track to frustration and unhappiness.
+At the end of the meeting, if the discussion was resolved, it should be clear which ideas will be put to test and who's responsible for them. When people are held accountable for the outcomes of their decisions, whether good or bad, the team learns and grows more effectively. A startup is an incredible opportunity to practice decision-making and learn from the results—whether rewarding or painful. Accountability drives progress, while its absence fosters victimhood and finger-pointing—a fast track to frustration and unhappiness (in life as a whole).
 
-## Persistence and Overcoming Shyness
+## But Don't Be Misaligned
+
+To succeed in any endeavor, a team must be aligned (yes, it’s a buzzword these days) in their goals.
+Does that mean not having disagreements? No. Alignment is about shared goals, long-term vision, and the general path to achieving that vision. Being aligned means everyone on the team is in the same boat, aware of the chosen direction, and paddling together. Even if you disagree with some idea, you might agree that you'll work on some experiment to test it.
+
+Alignment doesn’t even mean that everyone will agree with every decision along the way. That’s where leadership comes in: to guide the team toward common goals, even when disagreements arise—as they inevitably will.
+
+In the early stages of a startup, when only the founding team exists, alignment is strongly correlated with sharing similar risks, putting in the same effort, and being equally involved. In my case, I left my project not because of disagreements (those were constant and healthy) but because of a deeper misalignment. One of my co-founders was part-time and primarily communicated with the other co-founder (they were family and lived together). This imbalance worsened over time and ultimately became untenable.
+
+Part-time involvement often means missing out on crucial meetings with clients, who are the primary source of information. The early stage of a startup is all about absorbing as much information as possible to understand your customers and refine your product. Everyone needs to experience that flow firsthand to make informed decisions together and iterate quickly. If that's not the case, beware of misalignment in the mid- to long-term goals.
+
+## Persistence and Shyness
 
 As an engineer, one of the first and most important things I had to unlearn was my shyness. It’s completely counterproductive when you need to put your startup out in the world and find the people who might be interested in it. Reaching out to strangers—or acquaintances you barely know—is unavoidable. For me, being “forced” into this process became a great opportunity for personal growth. Looking back, I can’t believe how much time I wasted by being shy.
 
@@ -30,10 +39,6 @@ Most people are surprisingly willing to help if you approach them with honesty, 
 ## Time Management Is Survival
 
 In a startup, there’s always more to do than hours in the day. But burning out doesn’t make you successful. I found that maintaining healthy habits—sleeping well, exercising, eating right—made me far more resilient during crunch times. Sure, there will be moments of intense pressure and sacrifice, and precisely for them, you need to prepare. Optimize your energy for the truly important milestones, suffering without purpose isn’t progress.
-
-## The Cost of Imbalance in Startups
-
-Startups thrive when the team is fully aligned in terms of risks taken, effort, and level of involvement. One of my co-founders was part-time and wasn't able to attend many client meetings. This imbalance created endless and usually unproductive debates. Without equal context and accountability, trust suffers, and so does progress. The early stage of a startup is all about absorbing as much information as possible to understand your customers and refine your product. Everyone needs to experience that flow firsthand to make informed decisions together and iterate fast.
 
 ## Technology Choices Matter—But Stay Flexible
 
