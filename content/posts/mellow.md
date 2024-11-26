@@ -9,6 +9,18 @@ tags = ["startup","commercial","engineering"]
 
 Last year, I co-founded a startup with two colleagues. The experience was incredible and full of unexpected lessons. A month ago, I stepped away from the project, but the process taught me a lot, and I’d like to share some key takeaways.
 
+## Disagree and Keep Moving
+
+If you care about results, don't hide your disagreements during decision-making. Startups need to move fast, but avoiding conflict by being agreeable will backfire sooner or later. The key skill co-founders need to master is making decisions quickly while fostering open discussions. While unanimous decisions are ideal after laying out facts and reasoning, sometimes that's not possible and startups often require action before certainty.
+
+When disagreements arise, find ways to break deadlocks—use majority voting, alternating decision-making, or letting the person advocating for a decision take responsibility for its execution (this is often how roles emerge organically).
+Sometimes, the best path isn’t clear without experimentation. A startup thrives on learning through testing, and in many cases, it’s better to make a decision and move forward than to stall in endless debates.
+
+I don't think there's a universal formula for balancing speed and discussion. It depends on roles, expertise, leadership styles and individual personalities. But it surely doesn't work if you say "I think that's a good idea" when you're actually thinking "that's a bad idea". Disagreeing openly isn’t a problem; hiding your disagreement is. Open debate and clear accountability lead to better long-term alignment, or quickly reveal when something isn't working.
+
+When people are responsible for the outcomes of their decisions, whether good or bad, the team learns and grows more effectively.
+A startup is an incredible opportunity to practice decision-making and learn from the outcomes—whether painful or rewarding. Accountability drives progress, while its absence fosters victimhood and finger-pointing—a fast track to frustration and unhappiness.
+
 ## Persistence and Overcoming Shyness
 
 As an engineer, one of the first and most important things I had to unlearn was my shyness. It’s completely counterproductive when you need to put your startup out in the world and find the people who might be interested in it. Reaching out to strangers—or acquaintances you barely know—is unavoidable. For me, being “forced” into this process became a great opportunity for personal growth. Looking back, I can’t believe how much time I wasted by being shy.
@@ -22,18 +34,6 @@ In a startup, there’s always more to do than hours in the day. But burning out
 ## The Cost of Imbalance in Startups
 
 Startups thrive when the team is fully aligned in terms of risks taken, effort, and level of involvement. One of my co-founders was part-time and wasn't able to attend many client meetings. This imbalance created endless and usually unproductive debates. Without equal context and accountability, trust suffers, and so does progress. The early stage of a startup is all about absorbing as much information as possible to understand your customers and refine your product. Everyone needs to experience that flow firsthand to make informed decisions together and iterate fast.
-
-## Disagree and Keep Moving
-
-If you care about results, don't hide your disagreements during decision-making. Startups need to move fast, but avoiding conflict by being agreeable will backfire sooner or later. The key skill co-founders need to master is making decisions quickly while fostering open discussions. While unanimous decisions are ideal after laying out facts and reasoning, sometimes that's not possible and startups often require action before certainty.
-
-When disagreements arise, find ways to break deadlocks—use majority voting, alternating decision-making, or letting the person advocating for a decision take responsibility for its execution (this is often how roles emerge organically).
-Sometimes, the best path isn’t clear without experimentation. A startup thrives on learning through testing, and in many cases, it’s better to make a decision and move forward than to stall in endless debates.
-
-I don't think there's a universal formula for balancing speed and discussion. It depends on roles, expertise, leadership styles and individual personalities. But it surely doesn't work if you say "I think that's a good idea" when you're actually thinking "that's a bad idea". Disagreeing openly isn’t a problem; hiding your disagreement is. Open debate and clear accountability lead to better long-term alignment, or quickly reveal when something isn't working.
-
-When people are responsible for the outcomes of their decisions, whether good or bad, the team learns and grows more effectively.
-A startup is an incredible opportunity to practice decision-making and learn from the outcomes—whether painful or rewarding. Accountability drives progress, while its absence fosters victimhood and finger-pointing—a fast track to frustration and unhappiness.
 
 ## Technology Choices Matter—But Stay Flexible
 

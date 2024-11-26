@@ -1,11 +1,21 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Pages on Braulio Ríos - Development Blog</title>
+    <title>Pages on Braulio Ríos - Engineering ⚡️ Development</title>
     <link>/page/</link>
-    <description>Braulio Ríos - Development Blog (Pages)</description>
+    <description>Braulio Ríos - Engineering ⚡️ Development (Pages)</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
+    
+      
+        <managingEditor>braulioriosf@gmail.com
+          
+            (Braulio Ríos)
+          
+        </managingEditor>
+      
+
+      
     
 
     
@@ -18,7 +28,7 @@
       <title>Contact</title>
       <link>/page/contact/</link>
       <pubDate>Mon, 04 Nov 2024 17:23:04 -0300</pubDate>
-      
+      <author>braulioriosf@gmail.com (Braulio Ríos)</author>
       <guid>/page/contact/</guid>
       <description>&lt;p&gt;Feel free to reach out!&lt;/p&gt;
 &lt;ul&gt;

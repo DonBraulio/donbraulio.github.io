@@ -1,15 +1,25 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Categories on Braulio Ríos - Development Blog</title>
+    <title>Categories on Braulio Ríos - Engineering ⚡️ Development</title>
     <link>/categories/</link>
-    <description>Braulio Ríos - Development Blog (Categories)</description>
+    <description>Braulio Ríos - Engineering ⚡️ Development (Categories)</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     
+      
+        <managingEditor>braulioriosf@gmail.com
+          
+            (Braulio Ríos)
+          
+        </managingEditor>
+      
+
+      
+    
 
     
-    <lastBuildDate>Fri, 22 Nov 2024 13:00:51 -0300</lastBuildDate>
+    <lastBuildDate>Mon, 25 Nov 2024 17:23:31 -0300</lastBuildDate>
     
     <atom:link href="/categories/index.xml" rel="self" type="application/rss+xml" />
     

@@ -1,13 +1,13 @@
 baseURL = "https://donbraulio.github.io/"
 languageCode = 'en-us'
-title = "Lamparilla 💡"
+title = "Braulio Ríos"
 
 
 theme = "anubis2"
 
 [languages]
 	[languages.en]
-		title = "Braulio Ríos - Development Blog"
+		title = "Braulio Ríos - Engineering ⚡️ Development"
 		languageCode = "en-us"
 		LanguageName = "🇺🇸EN"
 		contentDir = "content"
@@ -29,12 +29,19 @@ theme = "anubis2"
 			pageRef = '/page/contact'
 			weight = 4
         
+[params.author]
+name = "Braulio Ríos"
+email  = "braulioriosf@gmail.com"
+location = "Uruguay"
+
 [params]
+description = "Development blog by Braulio Ríos"
 mainSections = ["post"]
 copyright = "&#xA9; 2024 by Braulio Ríos. All Rights Reserved."
 google_ad_client = "ca-pub-******"
 ga4 = "G-******"
 sharethis = ""
+readMore = true
 
 [outputs]
   home = ["HTML", "JSON"]

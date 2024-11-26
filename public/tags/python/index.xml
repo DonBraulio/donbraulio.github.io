@@ -1,11 +1,21 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Python on Braulio Ríos - Development Blog</title>
+    <title>Python on Braulio Ríos - Engineering ⚡️ Development</title>
     <link>/tags/python/</link>
-    <description>Braulio Ríos - Development Blog (Python)</description>
+    <description>Braulio Ríos - Engineering ⚡️ Development (Python)</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
+    
+      
+        <managingEditor>braulioriosf@gmail.com
+          
+            (Braulio Ríos)
+          
+        </managingEditor>
+      
+
+      
     
 
     
@@ -18,7 +28,7 @@
       <title>Lessons from Building ‘Pandas for Temporal Data’ with Google</title>
       <link>/posts/temporian/</link>
       <pubDate>Fri, 22 Nov 2024 13:00:51 -0300</pubDate>
-      
+      <author>braulioriosf@gmail.com (Braulio Ríos)</author>
       <guid>/posts/temporian/</guid>
       <description>&lt;p&gt;Time-series data is everywhere, from tracking user behavior to monitoring IoT sensors. Last year, while working at Tryolabs, I had the privilege of collaborating with Google to build an open-source Python library named Temporian. If Pandas is the go-to library for tabular data, Temporian aims to fill that role for temporal data.&lt;/p&gt;
 &lt;figure&gt;&lt;img src=&#34;http://localhost:1313/images/temporian/temporian_diagram.avif&#34;
@@ -102,10 +112,10 @@ Another highlight of the project was our focus on usability. We created test pro
     </item>
     
     <item>
-      <title>Python ❤️ C&#43;&#43; for Embedded Computer Vision and Tracking</title>
+      <title>Embedded Computer Vision and Tracking in Real Time</title>
       <link>/posts/maskcam/</link>
       <pubDate>Thu, 21 Nov 2024 13:44:18 -0300</pubDate>
-      
+      <author>braulioriosf@gmail.com (Braulio Ríos)</author>
       <guid>/posts/maskcam/</guid>
       <description>&lt;figure&gt;&lt;img src=&#34;http://localhost:1313/images/maskcam/maskcam_hardware.avif&#34;
     alt=&#34;Hardware for the smart camera&#34; width=&#34;70%&#34;&gt;&lt;figcaption&gt;
@@ -125,6 +135,12 @@ Another highlight of the project was our focus on usability. We created test pro
 &lt;/div&gt;
 &lt;/h2&gt;
 &lt;p&gt;NVIDIA&amp;rsquo;s Jetson Nano, while affordable and accessible (USD 90 at the time), is constrained in terms of memory (4GB of RAM) and CPU resources. Developing a system capable of handling multiple tasks—including computer vision, streaming, and storage management—requires efficient memory management, GPU processing, and robust orchestration of parallel processes.&lt;/p&gt;
+&lt;figure&gt;&lt;img src=&#34;http://localhost:1313/images/maskcam/maskcam_jetson.png&#34;
+    alt=&#34;Jetson Nano SOM&#34; width=&#34;30%&#34;&gt;&lt;figcaption&gt;
+      &lt;p&gt;Jetson Nano SOM&lt;/p&gt;
+    &lt;/figcaption&gt;
+&lt;/figure&gt;
+
 &lt;p&gt;Pure Python solutions fall short here:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;The Global Interpreter Lock (GIL) limits true multithreading.&lt;/li&gt;

@@ -10,15 +10,18 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="referrer" content="no-referrer-when-downgrade">
 
-<title>Lessons from Building ‘Pandas for Temporal Data’ with Google - Braulio Ríos - Engineering ⚡️ Development</title>
+<title>What I learned from creating (and leaving) a startup - Braulio Ríos - Engineering ⚡️ Development</title>
 
-<meta name="description" content="Time-series data is everywhere, from tracking user behavior to monitoring IoT sensors. Last year, while working at Tryolabs, I had the privilege of collaborating with Google to build an open-source Python library named Temporian. If Pandas is the go-to library for tabular data, Temporian aims to fill that role for temporal data.
+<meta name="description" content="Last year, I co-founded a startup with two colleagues. The experience was incredible and full of unexpected lessons. A month ago, I stepped away from the project, but the process taught me a lot, and I’d like to share some key takeaways.
 
-      The role of Temporian in a data pipeline.
+
     
+        #
+    
+    Disagree and Keep Moving
 
 
-Here’s a glimpse into my experience as a developer on this incredible project and the lessons I learned along the way.">
+If you care about results, don&rsquo;t hide your disagreements during decision-making. Startups need to move fast, but avoiding conflict by being agreeable will backfire sooner or later. The key skill co-founders need to master is making decisions quickly while fostering open discussions. While unanimous decisions are ideal after laying out facts and reasoning, sometimes that&rsquo;s not possible and startups often require action before certainty.">
 
 
 
@@ -314,7 +317,7 @@ Here’s a glimpse into my experience as a developer on this incredible project 
     <article class="post h-entry">
         <div class="post-header">
             <header>
-                <h1 class="p-name post-title">Lessons from Building ‘Pandas for Temporal Data’ with Google</h1>
+                <h1 class="p-name post-title">What I learned from creating (and leaving) a startup</h1>
                 
 
             </header>
@@ -325,12 +328,12 @@ Here’s a glimpse into my experience as a developer on this incredible project 
 <div class="post-info noselect">
     
         <div class="post-date dt-published">
-            <time datetime="2024-11-22">2024-11-22</time>
+            <time datetime="2024-11-25">2024-11-25</time>
             
         </div>
     
 
-    <a class="post-hidden-url u-url" href="/posts/temporian/">/posts/temporian/</a>
+    <a class="post-hidden-url u-url" href="/posts/mellow/">/posts/mellow/</a>
     <a href="http://localhost:1313/" class="p-name p-author post-hidden-author h-card" rel="me">map[email:braulioriosf@gmail.com location:Uruguay name:Braulio Ríos]</a>
 
 
@@ -347,16 +350,13 @@ Here’s a glimpse into my experience as a developer on this incredible project 
             <ul class="post-tags">
                 
                     
-                    <li><a href="/tags/python/">#Python</a></li>
+                    <li><a href="/tags/startup/">#Startup</a></li>
                 
                     
-                    <li><a href="/tags/c&#43;&#43;/">#C&#43;&#43;</a></li>
+                    <li><a href="/tags/commercial/">#Commercial</a></li>
                 
                     
-                    <li><a href="/tags/temporal-data/">#Temporal Data</a></li>
-                
-                    
-                    <li><a href="/tags/machine-learning/">#Machine Learning</a></li>
+                    <li><a href="/tags/engineering/">#Engineering</a></li>
                 
             </ul>
         
@@ -380,13 +380,12 @@ Here’s a glimpse into my experience as a developer on this incredible project 
     <summary>Table of Contents</summary>
     <div class="inner"><nav id="TableOfContents">
   <ul>
-    <li><a href="#the-problem">The Problem</a>
-      <ul>
-        <li><a href="#from-python-to-c-and-beyond">From Python to C++ and Beyond</a></li>
-      </ul>
-    </li>
-    <li><a href="#what-i-learned">What I Learned</a></li>
-    <li><a href="#final-thoughts">Final thoughts</a></li>
+    <li><a href="#disagree-and-keep-moving">Disagree and Keep Moving</a></li>
+    <li><a href="#persistence-and-overcoming-shyness">Persistence and Overcoming Shyness</a></li>
+    <li><a href="#time-management-is-survival">Time Management Is Survival</a></li>
+    <li><a href="#the-cost-of-imbalance-in-startups">The Cost of Imbalance in Startups</a></li>
+    <li><a href="#technology-choices-matterbut-stay-flexible">Technology Choices Matter—But Stay Flexible</a></li>
+    <li><a href="#make-it-enjoyable">Make It Enjoyable</a></li>
   </ul>
 </nav></div>
   </details>
@@ -413,84 +412,69 @@ Here’s a glimpse into my experience as a developer on this incredible project 
 </script>
 
         <div class="content e-content">
-            <p>Time-series data is everywhere, from tracking user behavior to monitoring IoT sensors. Last year, while working at Tryolabs, I had the privilege of collaborating with Google to build an open-source Python library named Temporian. If Pandas is the go-to library for tabular data, Temporian aims to fill that role for temporal data.</p>
-<figure><img src="/images/temporian/temporian_diagram.avif"
-    alt="Diagram showing Temporian as part of a data pipeline" width="70%"><figcaption>
-      <p>The role of Temporian in a data pipeline.</p>
-    </figcaption>
-</figure>
-
-<p>Here’s a glimpse into my experience as a developer on this incredible project and the lessons I learned along the way.</p>
-<h2 id="the-problem" >
+            <p>Last year, I co-founded a startup with two colleagues. The experience was incredible and full of unexpected lessons. A month ago, I stepped away from the project, but the process taught me a lot, and I’d like to share some key takeaways.</p>
+<h2 id="disagree-and-keep-moving" >
 <div>
-    <a href="#the-problem">
+    <a href="#disagree-and-keep-moving">
         #
     </a>
-    The Problem
+    Disagree and Keep Moving
 </div>
 </h2>
-<p>There are many libraries for time-series preprocessing, but Temporian is for time-sequences in general. The difference is subtle, a time-series is uniformly sampled (i.e: has a fixed sampling rate), while a time-sequence is just a set of events sampled at any possible timestamp.</p>
-<figure><img src="/images/temporian/temporian_data.avif"
-    alt="Different types of temporal data" width="70%"><figcaption>
-      <p>Basically anything with a timestamp can be thought as an event in a time-sequence.</p>
-    </figcaption>
-</figure>
-
-<p>There are also libraries particularly for univariate data, or only numerical data, among other particularities.
-But Temporian is intended to allow modeling anything with a timestamp, basically:</p>
-<ul>
-<li>Uniformly and non-uniformly sampled data</li>
-<li>Single and multi-source events</li>
-<li>Complex multivariate time-sequences</li>
-</ul>
-<figure><img src="/images/temporian/temporian_plots.avif"
-    alt="Plots with different types of temporal data" width="100%"><figcaption>
-      <p>Different types of temporal data.</p>
-    </figcaption>
-</figure>
-
-<p>On top of that, it&rsquo;s intended to be blisteringly fast even with tons of data. I mean, it&rsquo;s backed by Google. So the engineering design is an important aspect, as well as writing the critical parts in C++ to optimize processing.</p>
-<p>Finally, it&rsquo;s intended to avoid common mistakes when handling temporal data, which usually arise when other libraries like pandas or numpy are adapted for these purposes. The most common mistake (precisely because it&rsquo;s hard to spot sometimes) is future leakage. Which means leaking data from events in the future, to build features if previous events. Temporian is specifically designed in a way that avoids that, ensuring robust, error-free feature engineering—essential for machine learning applications.</p>
-<h3 id="from-python-to-c-and-beyond" >
+<p>If you care about results, don&rsquo;t hide your disagreements during decision-making. Startups need to move fast, but avoiding conflict by being agreeable will backfire sooner or later. The key skill co-founders need to master is making decisions quickly while fostering open discussions. While unanimous decisions are ideal after laying out facts and reasoning, sometimes that&rsquo;s not possible and startups often require action before certainty.</p>
+<p>When disagreements arise, find ways to break deadlocks—use majority voting, alternating decision-making, or letting the person advocating for a decision take responsibility for its execution (this is often how roles emerge organically).
+Sometimes, the best path isn’t clear without experimentation. A startup thrives on learning through testing, and in many cases, it’s better to make a decision and move forward than to stall in endless debates.</p>
+<p>I don&rsquo;t think there&rsquo;s a universal formula for balancing speed and discussion. It depends on roles, expertise, leadership styles and individual personalities. But it surely doesn&rsquo;t work if you say &ldquo;I think that&rsquo;s a good idea&rdquo; when you&rsquo;re actually thinking &ldquo;that&rsquo;s a bad idea&rdquo;. Disagreeing openly isn’t a problem; hiding your disagreement is. Open debate and clear accountability lead to better long-term alignment, or quickly reveal when something isn&rsquo;t working.</p>
+<p>When people are responsible for the outcomes of their decisions, whether good or bad, the team learns and grows more effectively.
+A startup is an incredible opportunity to practice decision-making and learn from the outcomes—whether painful or rewarding. Accountability drives progress, while its absence fosters victimhood and finger-pointing—a fast track to frustration and unhappiness.</p>
+<h2 id="persistence-and-overcoming-shyness" >
 <div>
-    <a href="#from-python-to-c-and-beyond">
-        ##
-    </a>
-    From Python to C++ and Beyond
-</div>
-</h3>
-<p>For me as a developer, there were many interesting challenges in this project, from which I learned a lot:</p>
-<ul>
-<li><strong>Writing Performant Operators in C++</strong>:
-One contribution I particularly remember was the <code>tick_calendar</code> operator, which generates timestamps using a cron-like syntax (e.g., “every day at 2:15 AM”). This required diving deep into C++ for optimal performance—a challenging but deeply rewarding experience.</li>
-<li><strong>Ensuring Quality</strong>:
-Working with Google’s open-source standards meant adhering to the highest levels of code quality and test-driven development. Every release was meticulously reviewed to match the rigor of libraries like Pandas or NumPy.</li>
-<li><strong>Intuitive Design through UX Testing</strong>:
-Another highlight of the project was our focus on usability. We created test protocols that challenged developers to solve problems using Temporian’s documentation alone. Watching real users interact with our library revealed surprising gaps—and ultimately shaped a much better product.</li>
-</ul>
-<h2 id="what-i-learned" >
-<div>
-    <a href="#what-i-learned">
+    <a href="#persistence-and-overcoming-shyness">
         #
     </a>
-    What I Learned
+    Persistence and Overcoming Shyness
 </div>
 </h2>
-<p>Each of the points mentioned above can be mapped to some specific learnings:</p>
-<ul>
-<li>Cross-Language Development is a Superpower: Again, combining Python for ease of use and fast development and C++ for performance.</li>
-<li>Test-Driven Development is Non-Negotiable: When building a library meant to last, rigorous testing isn’t just a good practice—it’s the foundation.</li>
-<li>User Feedback is Priceless: Designing for intuition is hard. Real-world testing with developers showed how they interpreted our documentation and APIs, often in ways we didn’t expect.</li>
-</ul>
-<h2 id="final-thoughts" >
+<p>As an engineer, one of the first and most important things I had to unlearn was my shyness. It’s completely counterproductive when you need to put your startup out in the world and find the people who might be interested in it. Reaching out to strangers—or acquaintances you barely know—is unavoidable. For me, being “forced” into this process became a great opportunity for personal growth. Looking back, I can’t believe how much time I wasted by being shy.</p>
+<p>Most people are surprisingly willing to help if you approach them with honesty, hard work, and a clear ask—especially if they believe you can solve a problem they have. But persistence is key in commercial roles: expect to follow up multiple times, wait days or weeks for responses, and keep pushing forward. Don’t take it personally—it’s just part of the game. Learning to embrace it is a skill in itself.</p>
+<h2 id="time-management-is-survival" >
 <div>
-    <a href="#final-thoughts">
+    <a href="#time-management-is-survival">
         #
     </a>
-    Final thoughts
+    Time Management Is Survival
 </div>
 </h2>
-<p>Temporian is open-source, hosted on <a href="https://github.com/google/temporian">Google’s GitHub</a> repository, and even announced on <a href="https://blog.tensorflow.org/2023/09/forecasting-with-tensorflow-decision-forests-and-temporian.html">Google’s TensorFlow blog</a> as a complement for ML pipelines. Seeing the library achieve this level of impact is one of the most gratifying experiences of my career.</p>
+<p>In a startup, there’s always more to do than hours in the day. But burning out doesn’t make you successful. I found that maintaining healthy habits—sleeping well, exercising, eating right—made me far more resilient during crunch times. Sure, there will be moments of intense pressure and sacrifice, and precisely for them, you need to prepare. Optimize your energy for the truly important milestones, suffering without purpose isn’t progress.</p>
+<h2 id="the-cost-of-imbalance-in-startups" >
+<div>
+    <a href="#the-cost-of-imbalance-in-startups">
+        #
+    </a>
+    The Cost of Imbalance in Startups
+</div>
+</h2>
+<p>Startups thrive when the team is fully aligned in terms of risks taken, effort, and level of involvement. One of my co-founders was part-time and wasn&rsquo;t able to attend many client meetings. This imbalance created endless and usually unproductive debates. Without equal context and accountability, trust suffers, and so does progress. The early stage of a startup is all about absorbing as much information as possible to understand your customers and refine your product. Everyone needs to experience that flow firsthand to make informed decisions together and iterate fast.</p>
+<h2 id="technology-choices-matterbut-stay-flexible" >
+<div>
+    <a href="#technology-choices-matterbut-stay-flexible">
+        #
+    </a>
+    Technology Choices Matter—But Stay Flexible
+</div>
+</h2>
+<p>Choosing the right tools can make or break your productivity. Trust your gut when selecting tech, but don’t be afraid to pivot if something isn’t working. It’s easy to fall into the sunken cost trap and stick with bad decisions, but that only slows you down and is demoralizing. Pick tools you’re excited about because if your startup succeeds, you’ll be using them a lot. And even if it doesn’t, you’ll walk away with valuable skills you’ll actually want to keep using.</p>
+<h2 id="make-it-enjoyable" >
+<div>
+    <a href="#make-it-enjoyable">
+        #
+    </a>
+    Make It Enjoyable
+</div>
+</h2>
+<p>Building a startup is incredibly demanding, but it should also be rewarding even if it&rsquo;s not profitable at first. If the process becomes unbearable, step back and reevaluate. You’re in a unique position to shape your work environment—make it something you’d be proud to wake up to every day.</p>
+<p>In the end, your product or whatever your startup is creating can fail, but if you are mindful about the people, the processes, and the lessons you learn, those things remain. While I’ve left the project, I don&rsquo;t regret even for a while about having tried this, because I learned things I couldn&rsquo;t have anywhere else.</p>
+<p>Future posts will dive into the technical side of things, but for now, these reflections capture the heart of my startup journey.</p>
 
         </div>
 
@@ -501,13 +485,6 @@ Another highlight of the project was our focus on usability. We created test pro
 
     
         
-        
-            <h3 class="read-next-title noselect">Read next</h3>
-            <ul class="read-next-posts noselect">
-                
-                <li><a href="/posts/maskcam/">Embedded Computer Vision and Tracking in Real Time</a></li>
-                
-            </ul>
         
     
 
