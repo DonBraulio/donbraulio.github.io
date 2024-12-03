@@ -19,7 +19,7 @@ There's no universal formula to resolve conflicts into action items. It depends 
 
 At the end of the meeting, if the discussion was resolved, it should be clear which ideas will be put to test and who's responsible for them. When people are held accountable for the outcomes of their decisions, whether good or bad, the team learns and grows more effectively. A startup is an incredible opportunity to practice decision-making and learn from the results—whether rewarding or painful. Accountability drives progress, while its absence fosters victimhood and finger-pointing—a fast track to frustration and unhappiness (in life as a whole).
 
-## But Don't Be Misaligned
+## Disagreement vs. Misalignment
 
 To succeed in any endeavor, a team must be aligned (yes, it’s a buzzword these days) in their goals.
 Does that mean not having disagreements? No. Alignment is about shared goals, long-term vision, and the general path to achieving that vision. Being aligned means everyone on the team is in the same boat, aware of the chosen direction, and paddling together. Even if you disagree with some idea, you might agree that you'll work on some experiment to test it.
